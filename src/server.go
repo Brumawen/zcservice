@@ -206,7 +206,7 @@ func (s *Server) run() {
 	}
 	s.RegisterService(&RegisterRequest{
 		ID:          s.Config.ID,
-		Name:        fmt.Sprintf("%s/%s/%d", s.Config.Name, s.hostName, s.PortNo),
+		Name:        s.Config.Name,
 		PortNo:      s.PortNo,
 		ServiceType: s.Config.DefaultServiceType,
 		Text:        []string{fmt.Sprintf("id=%s", s.Config.ID)},
