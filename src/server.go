@@ -28,6 +28,7 @@ type Server struct {
 	router   *mux.Router          // HTTP router
 	regList  map[string]*ZCServer // Zeroconf registration server list
 	regLock  sync.Mutex           // Mutex lock for appending and removing items from regList
+	hostName string               // HostName of computer
 }
 
 // AddController adds the specified web service controller to the Router
@@ -198,11 +199,17 @@ func (s *Server) run() {
 	}
 
 	// Register this service
+	if hn, err := os.Hostname(); err != nil {
+		s.hostName = s.Config.ID
+	} else {
+		s.hostName = hn
+	}
 	s.RegisterService(&RegisterRequest{
 		ID:          s.Config.ID,
-		Name:        "ZeroconfService",
+		Name:        fmt.Sprintf("%s/%s/%d", s.Config.Name, s.hostName, s.PortNo),
 		PortNo:      s.PortNo,
 		ServiceType: s.Config.DefaultServiceType,
+		Text:        []string{fmt.Sprintf("id=%s", s.Config.ID)},
 	})
 
 	// Start the web server

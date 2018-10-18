@@ -43,7 +43,7 @@ func NewServerFromRequest(r *RegisterRequest, srv *Server) *ZCServer {
 	}
 	s := ZCServer{
 		ID:          r.ID,
-		Name:        r.Name,
+		Name:        fmt.Sprintf("%s/%s/%d", r.Name, srv.hostName, r.PortNo),
 		PortNo:      r.PortNo,
 		ServiceType: r.ServiceType,
 		Text:        r.Text,

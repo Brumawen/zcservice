@@ -14,6 +14,7 @@ import (
 // Config defines the configuration for the web server
 type Config struct {
 	ID                 string `json:"id"`                 // ID of the ZeroConf microservice
+	Name               string `json:"name"`               // Name of the service
 	DefaultServiceType string `json:"defaultServiceType"` // Default Service Type to use
 }
 
@@ -71,6 +72,9 @@ func (c *Config) SetDefaults() {
 			c.ID = strings.Replace(uuid.String(), "-", "", -1)
 			mustSave = true
 		}
+	}
+	if c.Name == "" {
+		c.Name = "ZCService"
 	}
 	if c.DefaultServiceType == "" {
 		c.DefaultServiceType = "_zcservice._tcp"
