@@ -20,8 +20,9 @@ This will install and run the zcservice as a background service on the machine.
 ## Configuration
 
 There are a few configuration options available.  To set these, edit the config.json file that zcservice creates when it first runs.  This file contains json text with the following properties
-* id: This is a globally unique identifier generated for this installation.
-* defaultServiceType: This is the service type that the zcservice registers itself as.  It is also the service type that is used if a web request does not specify a service type.
+* <b>id</b>: This is a globally unique identifier generated for this installation.
+* <b>name</b>: This is the name of the service.  Defaults to "ZCService"
+* <b>defaultServiceType</b>: This is the service type that the zcservice registers itself as.  It is also the service type that is used if a web request does not specify a service type.  Defaults to "_zcservice._tcp"
 
 
 ## API Methods
@@ -51,7 +52,7 @@ To deregister a service, send a DELETE request to:
 
         http://127.0.0.1:20404/service/remove/{id}
 
-where {id} is the unique identifier of the service.
+where {id} is the unique identifier of the service instance.
 
 
 ### Get a list of services
